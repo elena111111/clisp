@@ -189,6 +189,43 @@ nil
 
 (0 (1 (3 (7 NIL NIL) NIL) (4 NIL NIL)) (2 (5 NIL NIL) (6 NIL NIL)))
 ```
+
+№47 Определите функцию УДАЛИТЬ-ВСЕ-СВОЙСТВА, которая удаляет все свойства символа.
+
+```lisp
+(defun del-all-prop (symb) 
+    
+	( (lambda (s-list)
+        
+		(if (null s-list)
+            
+			nil
+            
+			(cons (remprop symb (car s-list)) (del-all-prop symb))
+        
+		)) (symbol-plist symb)  
+    
+	)  
+
+)
+
+>(setf (get 'ice 'color) 'white)
+
+>(setf (get 'ice 'weight) 100)
+
+>(setf (get 'ice 'price) 30)
+
+
+
+>(symbol-plist 'ice)
+(PRICE 30 WEIGHT 100 COLOR WHITE)
+
+>(del-all-prop 'ice)
+
+>(symbol-plist 'ice)
+nil
+```
+
 # Функции высших порядков
 
 №1 Определите FUNCALL через функционал APPLY. 

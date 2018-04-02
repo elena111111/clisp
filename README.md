@@ -157,6 +157,39 @@ NIL
 > (first-coin '(1 0 9 -7 6 5) '(-2 -5))
 NIL
 ```
+
+№41  Реализовать генератор деревьев, чтобы выдаваемые им деревья имели количество вершин, точно соответствующее числу, 
+указанному в его первом аргументе. 
+
+```lisp
+(defun tree (n &optional (k 0))  
+    
+	(( lambda (index)
+        
+		(if (<= n k) 
+            
+			nil 
+            
+			(list k (tree n index) (tree n (+ index 1)) )
+        
+		)) (+ (* k 2) 1)
+    
+	)
+
+)
+
+>(tree 0)
+nil
+>(tree 1)
+
+(0 NIL NIL)
+>(tree 7)
+(0 (1 (3 NIL NIL) (4 NIL NIL)) (2 (5 NIL NIL) (6 NIL NIL)))
+ 
+>(tree 8)
+
+(0 (1 (3 (7 NIL NIL) NIL) (4 NIL NIL)) (2 (5 NIL NIL) (6 NIL NIL)))
+```
 # Функции высших порядков
 
 №1 Определите FUNCALL через функционал APPLY. 

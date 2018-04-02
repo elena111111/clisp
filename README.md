@@ -43,15 +43,25 @@ NIL
 №12  Определите функцию, заменяющую в исходном списке два подряд идущих одинаковых элемента одним. 
 
 ```lisp
-(defun dr2(li) 
-	(if (null li) 
-		nil (if (equal (car li) (cadr li))
-			 (dr2 (cdr li)) (cons (car li) (dr2 (cdr li))))
-	)
+(defun dr2(li)
+ 
+    (( lambda (head tail)
+
+	    (if (null li)
+ 
+		nil 
+		(if (equal head (cadr li))
+
+			(dr2 tail) 
+			(cons head (dr2 tail))
+		)
+
+	    )
+
+     ) (car li) (cdr li))
+
 )
 
- > (dr2 '(1 1 2 1 2 1))
-(1 2 1 2 1)
  > (dr2 '(1 1 2 1 2 1))
 (1 2 1 2 1)
 ```
@@ -72,10 +82,23 @@ T
 NIL
 
 (defun dr(li) 
-	(if (null li) nil 
-		(if (mem (car li) (cdr li)) 
-			(dr (cdr li)) (cons (car li) (dr (cdr li))))
+	
+	( (lambda (head tail)
+	   
+		(if (null li) 
+	       
+			nil 
+		    
+			(if (mem head (cdr li)) 
+			    
+				(dr tail) 
+			    
+				(cons head (dr tail)))
+	   
+		)) (car li) (cdr li)
+	
 	)
+
 )
 
 > (dr '(1 2 3))

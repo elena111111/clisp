@@ -162,18 +162,13 @@ NIL
 указанному в его первом аргументе. 
 
 ```lisp
-(defun tree (n &optional (k 0))  
-    
+(defun tree (n &optional (k 0))
 	(( lambda (index)
-        
-		(if (<= n k) 
-            
-			nil 
-            
+		(if (<= n k)
+			nil
 			(list k (tree n index) (tree n (+ index 1)) )
-        
+ 
 		)) (+ (* k 2) 1)
-    
 	)
 
 )
@@ -184,44 +179,31 @@ nil
 (0 NIL NIL)
 >(tree 7)
 (0 (1 (3 NIL NIL) (4 NIL NIL)) (2 (5 NIL NIL) (6 NIL NIL)))
- 
->(tree 8)
-
+>(tree 8))
 (0 (1 (3 (7 NIL NIL) NIL) (4 NIL NIL)) (2 (5 NIL NIL) (6 NIL NIL)))
 ```
 
 №47 Определите функцию УДАЛИТЬ-ВСЕ-СВОЙСТВА, которая удаляет все свойства символа.
 
 ```lisp
-(defun del-all-prop (symb) 
-    
+(defun del-all-prop (symb)
 	( (lambda (s-list)
-        
 		(if (null s-list)
-            
 			nil
-            
-			(cons (remprop symb (car s-list)) (del-all-prop symb))
-        
-		)) (symbol-plist symb)  
-    
-	)  
 
+			(cons (remprop symb (car s-list)) (del-all-prop symb))
+		)) (symbol-plist symb)
+	)
 )
 
 >(setf (get 'ice 'color) 'white)
-
 >(setf (get 'ice 'weight) 100)
-
 >(setf (get 'ice 'price) 30)
-
 
 
 >(symbol-plist 'ice)
 (PRICE 30 WEIGHT 100 COLOR WHITE)
-
 >(del-all-prop 'ice)
-
 >(symbol-plist 'ice)
 nil
 ```

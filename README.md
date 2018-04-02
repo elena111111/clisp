@@ -181,7 +181,6 @@ NIL
 >(tree 0)
 nil
 >(tree 1)
-
 (0 NIL NIL)
 >(tree 7)
 (0 (1 (3 NIL NIL) (4 NIL NIL)) (2 (5 NIL NIL) (6 NIL NIL)))

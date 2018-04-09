@@ -43,23 +43,16 @@ NIL
 №12  Определите функцию, заменяющую в исходном списке два подряд идущих одинаковых элемента одним. 
 
 ```lisp
-(defun dr2(li)
- 
-    (( lambda (head tail)
-
+(defun dr2 (li)
+    (( lambda (first second tail)
 	    (if (null li)
- 
-		nil 
-		(if (equal head (cadr li))
-
-			(dr2 tail) 
-			(cons head (dr2 tail))
-		)
-
+            nil 
+            (if (equal first second)
+                (dr2 tail) 
+                (cons first (dr2 tail))
+            )
 	    )
-
-     ) (car li) (cdr li))
-
+     ) (car li) (cadr li) (cdr li))
 )
 
  > (dr2 '(1 1 2 1 2 1))
@@ -82,23 +75,14 @@ T
 NIL
 
 (defun dr(li) 
-	
-	( (lambda (head tail)
-	   
+	((lambda (head tail)
 		(if (null li) 
-	       
 			nil 
-		    
-			(if (mem head (cdr li)) 
-			    
+			(if (mem head tail) 
 				(dr tail) 
-			    
 				(cons head (dr tail)))
-	   
 		)) (car li) (cdr li)
-	
 	)
-
 )
 
 > (dr '(1 2 3))
@@ -133,13 +117,15 @@ NIL
 
 ```lisp
 (defun first-coin (x y) 
-	(if (null x) 
-		nil 
-		(if (mem (car x) y) 
-			(car x) 
-			(first-coin (cdr x) y)
+	((lambda (head tail)
+        		(if (null x) 
+            			nil 
+            			(if (mem head y) 
+                				head 
+                				(first-coin tail y)
+			)
 		)
-	)
+	) (car x) (cdr x))
 )
 
 > (first-coin '(1) '(1))
@@ -223,14 +209,8 @@ nil
 к соответствующему элементу списка x = (x1 x2 ... xn)  и возвращает список, сформированный из результатов. 
 
 ```lisp
-(defun apl-apply (f x) 
-	(if (null f) 
-		nil 
-		(cons 
-			(apply (car f) (car x)) 
-			(apl-apply (cdr f) (cdr x))
-		) 
-	)
+(defun apl-apply (f x)
+	(mapcar 'apply f x)
 )
 
 > (apl-apply '(+ - equal) '((1 2) (3 4 5) (nil 0)))

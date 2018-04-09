@@ -44,15 +44,15 @@ NIL
 
 ```lisp
 (defun dr2 (li)
-    (( lambda (first second tail)
-	    (if (null li)
-            nil 
-            (if (equal first second)
-                (dr2 tail) 
-                (cons first (dr2 tail))
-            )
-	    )
-     ) (car li) (cadr li) (cdr li))
+	(( lambda (first second tail)
+		(if (null li)
+            			nil 
+            			(if (equal first second)
+                				(dr2 tail) 
+                				(cons first (dr2 tail))
+            			)
+	    	)
+     	) (car li) (cadr li) (cdr li))
 )
 
  > (dr2 '(1 1 2 1 2 1))
@@ -64,8 +64,11 @@ NIL
 ```lisp
 (defun mem(a li) 
 	(if (null li) 
-		nil (if (equal a (car li)) 
-			t (mem a (cdr li)))
+		nil 
+		(if (equal a (car li)) 
+			t 
+			(mem a (cdr li))
+		)
 	)
 )
 
@@ -80,7 +83,8 @@ NIL
 			nil 
 			(if (mem head tail) 
 				(dr tail) 
-				(cons head (dr tail)))
+				(cons head (dr tail))
+			)
 		)) (car li) (cdr li)
 	)
 )

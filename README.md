@@ -220,3 +220,22 @@ nil
 > (apl-apply '(+ - equal) '((1 2) (3 4 5) (nil 0)))
 (3 -6 NIL)
 ```
+
+№5 Определитефункциональныйпредикат(НЕКОТОРЫй пред список),которыйистинен, когда, 
+являющейся функциональным аргументом предикат пред истинен хотя бы для одного элемента списка список. 
+
+```lisp
+(defun some-1 (p li)
+	(not (null (mapcan 
+		#'(lambda (x) (if (funcall p x) (list t))) li)))
+)
+
+> (some-1 'numberp '(5 e u 9))
+T
+> (some-1 'numberp '(5g e7 u r))
+NIL
+> (some-1 'numberp '((5 6 7) e u p))
+NIL
+> (some-1 'numberp '(5))
+T
+```

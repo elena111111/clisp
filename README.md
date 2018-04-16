@@ -279,4 +279,57 @@ T
 > (fun '(+ - eq) '(5 3))
 (8 2 NIL)
 ``` 
+# К. р.
 
+№7 Написать программу для нахождения минимального из чисел, являющихся максимальными в каждой из строк заданной 
+прямоугольной матрицы. Использовать применяющие и/или отображающие функционалы. 
+
+```lisp
+(defun min-max (x)
+    	(apply 'min 
+		(mapcar #'(lambda (y) (apply 'max y)) x) 
+	)
+)
+
+> (min-max '((1 2 3 4) (5 6 7 8) (-1 -2 -3 -4)))
+-1
+> (min-max '((1)))
+1
+> (min-max '((0 9)))
+9
+> (min-max '((0) (9)))
+0
+```
+№2 Написать генератор совершенных чисел.Число называется совершенным, если оно равно сумме своих делителей. 
+
+(defun dividers (a &optional (b (floor a 2)))
+ 	(if (= b 0) nil
+ 		((lambda (dec)
+            			(if (eq (mod a b) 0) 
+               				(cons b dec)
+               				dec
+            			)
+         		)  (dividers a (- b 1))) 
+	)
+)
+
+(defun is-perfect (x) 
+	(if (= (apply '+ (dividers x)) x) t nil)
+)
+
+(defun perfect ()
+	(let ((x 0))
+        		(lambda () 
+            			(if (is-perfect (setq x (+ x 1))) x (funcall tmp))
+        		)
+    	)
+)
+
+(setq tmp (perfect))
+(setq g1 (perfect))
+> (funcall g1)
+6
+> (funcall g1)
+28
+> (funcall g1)
+496

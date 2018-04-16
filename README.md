@@ -239,3 +239,44 @@ NIL
 > (some-1 'numberp '(5))
 T
 ```
+№9 Напишите генератор порождения чисел Фибоначчи: 0, 1, 1, 2, 3, 5, ... 
+
+```lisp
+(defun fib ()
+	(let ((prev-prev -1) (prev 0) (next 1))
+		(lambda () 
+			(if (= prev-prev -1)
+				(setq prev-prev 0)
+				(setq prev-prev prev prev next next (+ prev prev-prev))
+			)
+		)
+	)
+)
+
+> (setq f (fib))
+> (funcall f)
+0
+> (funcall f)
+1
+> (funcall f)
+1
+> (funcall f)
+2
+> (funcall f)
+3
+> (funcall f)
+5
+
+```
+
+№11 Определите фукнционал МНОГОФУН, который использует функции, являющиеся аргументами, по следующей схеме: (МНОГОФУН ’(f g ... h) x) ⇔ (LIST (f x) (g x) ... (h x)). 
+
+```lisp
+(defun fun (f x)
+	(mapcar #'(lambda (y) (apply y x)) f)
+)
+
+> (fun '(+ - eq) '(5 3))
+(8 2 NIL)
+``` 
+

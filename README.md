@@ -304,13 +304,13 @@ T
 
 ```lisp
 (defun dividers (a &optional (b (floor a 2)))
- 	(if (= b 0) nil
- 		((lambda (dec)
-            			(if (eq (mod a b) 0) 
-               				(cons b dec)
-               				dec
-            			)
-         		)  (dividers a (- b 1))) 
+	(if (= b 0) nil
+		((lambda (dec)
+			(if (eq (mod a b) 0) 
+				(cons b dec)
+				dec
+			)
+		)  (dividers a (- b 1))) 
 	)
 )
 
@@ -320,10 +320,10 @@ T
 
 (defun perfect ()
 	(let ((x 0))
-        		(lambda () 
-            			(if (is-perfect (setq x (+ x 1))) x (funcall tmp))
-        		)
-    	)
+		(lambda () 
+			(if (is-perfect (setq x (+ x 1))) x (funcall tmp))
+		)
+	)
 )
 
 (setq tmp (perfect))
